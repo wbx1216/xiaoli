@@ -1,0 +1,57 @@
+<template>
+	<div>
+		<div class="background"></div>
+		<img src="../../static/download2.jpg" style="width: 100%;display: block;height: 100%;" @click="alert=1">
+		<div class="cover" v-show="alert==1" @click="alert=0"></div>
+		<img src="../assets/share2.png" v-show="alert==1" @click="alert=0" class="share">
+	</div>
+</template>
+
+<script>
+	export default {
+		name: 'search',
+		data() {
+			return {
+				alert: 0
+			}
+		},
+		beforeCreate(){
+			this.$utils.getCode();
+		},
+		mounted() {
+			let link=location.origin+"/doc/download.htm"
+			let title="下载小狸阅读APP，即领新人红包"
+			let desc="一边阅读一边赚钱~"
+			this.$utils.wxShare(link,title,desc)
+		}
+	}
+</script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+	.background {
+		width: 100%;
+		height: 100%;
+		background: #ffe9e4;
+		position: fixed;
+		z-index: -1;
+	}
+
+	.cover {
+		background: rgba(0, 0, 0, 0.7);
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		z-index: 9;
+		left: 0;
+		top: 0;
+	}
+
+	.share {
+		position: fixed;
+		width: 150px;
+		display: block;
+		top: 50px;
+		right: 10px;
+		z-index: 10;
+	}
+</style>
